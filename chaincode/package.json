@@ -1,0 +1,27 @@
+{
+  "name": "chaincode",
+  "version": "1.0.0",
+  "description": "Chaincode project to define contracts in hyperledger fabric",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "watch": "tsc -w",
+    "lint": "eslint . --ext .ts",
+    "test": "jest",
+    "start": "tsc && set -x && fabric-chaincode-node server --chaincode-address=0.0.0.0:9999 --chaincode-id=basicts_1.0:1f7c7d6b88346c16197c36bbac9b5d8bd65414d9f99132f32bbaea228e73026b"
+  },
+  "dependencies": {
+    "ethers": "^6.13.5",
+    "fabric-contract-api": "^2.5.2",
+    "fabric-shim": "^2.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.2.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  }
+}
