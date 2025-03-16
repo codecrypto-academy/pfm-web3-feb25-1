@@ -19,19 +19,19 @@ const UserList: React.FC<UserListProps> = ({ users, isLoading = false }) => {
   }
 
   return (
-    <div className="bg-gray-100 rounded-lg p-6 shadow-inner">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Usuarios</h2>
-      
-      {users.length === 0 ? (
-        <p className="text-gray-500 text-center py-4">No hay usuarios registrados</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {users.map(user => (
-            <UserCard key={user.address} user={user} />
-          ))}
-        </div>
-      )}
+<div className="bg-gray-100 rounded-lg p-6 shadow-inner max-h-[70vh] overflow-y-auto">
+  
+  
+  {users.length === 0 ? (
+    <p className="text-gray-500 text-center py-4">No hay usuarios registrados</p>
+  ) : (
+    <div className="flex flex-col space-y-3">
+      {users.map(user => (
+        <UserCard key={user.address} user={user} />
+      ))}
     </div>
+  )}
+</div>
   );
 };
 
