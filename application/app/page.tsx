@@ -14,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     // Simulate API call to fetch users
-    const fetchUsers = async () => {
+/*     const fetchUsers = async () => {
       setIsLoading(true);
       try {
         // In a real app, you would fetch from an API
@@ -40,8 +40,19 @@ export default function Home() {
         console.error('Error fetching users:', error);
         setIsLoading(false);
       }
+    }; */
+    const fetchUsers = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('http://localhost:5551/users/allusers');
+        const data = await response.json();
+        setUsers(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setIsLoading(false);
+      }
     };
-
     fetchUsers();
   }, []);
   return (
