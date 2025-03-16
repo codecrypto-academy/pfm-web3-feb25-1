@@ -1,11 +1,6 @@
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Home() {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <div>
+      <h1>¡Next.js está funcionando correctamente! 🎉</h1>
+    </div>
   );
-}
