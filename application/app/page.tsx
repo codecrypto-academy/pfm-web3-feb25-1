@@ -23,11 +23,12 @@ export default function Home() {
         
         // Mock data for demonstration
         const mockUsers: User[] = [
-          { id: 1, name: 'Ana García', email: 'ana@example.com', avatar: 'https://i.pravatar.cc/150?img=1' },
-          { id: 2, name: 'Carlos López', email: 'carlos@example.com', avatar: 'https://i.pravatar.cc/150?img=2' },
-          { id: 3, name: 'Elena Martínez', email: 'elena@example.com', avatar: 'https://i.pravatar.cc/150?img=3' },
-          { id: 4, name: 'David Rodríguez', email: 'david@example.com', avatar: 'https://i.pravatar.cc/150?img=4' },
-          { id: 5, name: 'Laura Sánchez', email: 'laura@example.com', avatar: 'https://i.pravatar.cc/150?img=5' },
+          {
+            address: "0xc79A4B75b085E902F46f56db9B6Fc753c36b19ab",
+            role: "factory",
+            name: "Big Motors C.A",
+            active: true
+        },
         ];
         
         // Simulate network delay
