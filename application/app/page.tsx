@@ -1,60 +1,14 @@
-"use client"
-
-import React, { useState, useEffect } from 'react';
-import type { NextPage } from 'next';
+import React from 'react';
 import Head from 'next/head';
 import Header from './components/Header';
 import UserList from './components/UserList';
 import { User } from './lib/definition';
-import Image from "next/image";
+import { fetchUsers } from './lib/data';
 
-export default function Home() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+export default async function Home() {
+  const  users = await fetchUsers();
+  console.log(users);
 
-  useEffect(() => {
-    // Simulate API call to fetch users
-/*     const fetchUsers = async () => {
-      setIsLoading(true);
-      try {
-        // In a real app, you would fetch from an API
-        // const response = await fetch('/api/users');
-        // const data = await response.json();
-        
-        // Mock data for demonstration
-        const mockUsers: User[] = [
-          {
-            address: "0xc79A4B75b085E902F46f56db9B6Fc753c36b19ab",
-            role: "factory",
-            name: "Big Motors C.A",
-            active: true
-        },
-        ];
-        
-        // Simulate network delay
-        setTimeout(() => {
-          setUsers(mockUsers);
-          setIsLoading(false);
-        }, 800);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        setIsLoading(false);
-      }
-    }; */
-    const fetchUsers = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch('http://localhost:5551/users/allusers');
-        const data = await response.json();
-        setUsers(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        setIsLoading(false);
-      }
-    };
-    fetchUsers();
-  }, []);
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
@@ -71,7 +25,7 @@ export default function Home() {
           
         </div>
         <h2 className="text-xl font-semibold mb-4 text-gray-700">Users</h2>
-        <UserList users={users} isLoading={isLoading} />
+        <UserList users={users} />
       </main>
     </div>
   );
