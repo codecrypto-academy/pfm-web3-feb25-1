@@ -37,6 +37,7 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
   // Estado inicial del formulario
   const initialState: FormState = { errors: {} };
   
+  
   // Usar useFormState para manejar el estado del formulario y errores del servidor
   const [state, formAction] = useActionState(createUser, initialState);
   
@@ -44,6 +45,35 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
   const [address, setAddress] = useState('');
   const [addressError, setAddressError] = useState<string | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+    // 1. Añade un estado local para los errores
+  const [formErrors, setFormErrors] = useState<FormState['errors']>({});
+
+  // 2. Añade un estado para rastrear si el modal ha sido abierto
+  const [hasOpened, setHasOpened] = useState(false);
+
+  // 3. Sincroniza los errores del state con tu estado local cuando cambian
+  useEffect(() => {
+  if (state.errors) {
+    setFormErrors(state.errors);
+  }
+  }, [state.errors]);
+
+  // 4. Detecta cuando el modal se abre
+  useEffect(() => {
+  if (isOpen && !hasOpened) {
+    setHasOpened(true);
+  }
+  }, [isOpen, hasOpened]);
+
+  // 5. Resetea los errores cuando el modal se cierra
+  useEffect(() => {
+  if (!isOpen && hasOpened) {
+    // Resetear solo los errores
+    setFormErrors({});
+    setHasOpened(false);
+  }
+  }, [isOpen, hasOpened]);
 
   // Efecto para cerrar el modal después de un envío exitoso
   useEffect(() => {
@@ -149,13 +179,13 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
               id="name"
               name="name"
               className={`shadow appearance-none border ${
-                state.errors?.name ? 'border-red-500' : 'border-gray-300'
+                formErrors?.name ? 'border-red-500' : 'border-gray-300'
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               placeholder="Nombre completo"
             />
-            {state.errors?.name && (
+            {formErrors?.name && (
               <ul className="text-red-500 text-xs italic mt-1">
-                {state.errors.name.map((error, index) => (
+                {formErrors.name.map((error: string, index: number) => (
                   <li key={index}>{error}</li>
                 ))}
               </ul>
