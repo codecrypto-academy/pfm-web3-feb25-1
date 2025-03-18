@@ -153,16 +153,16 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
                 validateAddress(e.target.value);
               }}
               className={`shadow appearance-none border ${
-                addressError || state.errors?.address ? 'border-red-500' : 'border-gray-300'
+                addressError || formErrors?.address ? 'border-red-500' : 'border-gray-300'
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               placeholder="0x..."
             />
             {addressError && (
               <p className="text-red-500 text-xs italic mt-1">{addressError}</p>
             )}
-            {state.errors?.address && (
+            {formErrors?.address && (
               <ul className="text-red-500 text-xs italic mt-1">
-                {state.errors.address.map((error, index) => (
+                {formErrors.address.map((error: string, index: number) => (
                   <li key={index}>{error}</li>
                 ))}
               </ul>
@@ -201,7 +201,7 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
               id="role"
               name="role"
               className={`shadow appearance-none border ${
-                state.errors?.role ? 'border-red-500' : 'border-gray-300'
+                formErrors?.role ? 'border-red-500' : 'border-gray-300'
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             >
               <option value="">Seleccionar rol</option>
@@ -212,9 +212,9 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
               <option value="retailer">Retailer</option>
               <option value="consumer">Consumer</option>
             </select>
-            {state.errors?.role && (
+            {formErrors?.role && (
               <ul className="text-red-500 text-xs italic mt-1">
-                {state.errors.role.map((error, index) => (
+                {formErrors.role.map((error: string, index: number) => (
                   <li key={index}>{error}</li>
                 ))}
               </ul>
