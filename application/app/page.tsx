@@ -9,7 +9,6 @@ import { fetchUsers } from './lib/data';
 
 export default async function Home() {
   const  users = await fetchUsers();
-  console.log(users);
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -2,26 +2,44 @@
 
 import { useState } from 'react';
 import AddUserModal from './AddUserModal';
+import { Toast } from './Toast'; // Necesitaremos crear este componente
 
 export default function AddUserButton() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const handleSuccess = (message: string) => {
+    setSuccessMessage(message);
+    
+    // Opcional: Ocultar el mensaje después de unos segundos
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 5000);
+  };
+
   return (
     <>
-      <button 
+      <button
         onClick={() => setIsModalOpen(true)}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-        </svg>
-        Add User
+        Add user
       </button>
       
       <AddUserModal 
         isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={handleSuccess}
       />
+      
+      {/* Mostrar mensaje de éxito */}
+      {successMessage && (
+        <Toast 
+          message={successMessage} 
+          type="success" 
+          onClose={() => setSuccessMessage(null)} 
+        />
+      )}
     </>
   );
 }
