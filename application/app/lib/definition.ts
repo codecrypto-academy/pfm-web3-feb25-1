@@ -4,3 +4,14 @@ export interface User {
     active?: boolean;
     role: string;
   }
+
+export type FormState = {
+  errors?: {
+    address?: string[];
+    name?: string[];
+    role?: string[];
+    _form?: string[];
+  };
+  success?: boolean;
+  message?: string;
+}
