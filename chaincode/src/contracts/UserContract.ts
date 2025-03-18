@@ -266,4 +266,33 @@ export class UserContract extends Contract {
         const userJSON = await ctx.stub.getState(userKey);
         return userJSON && userJSON.length > 0;
     }
+
+
+    @Transaction()
+    public async deleteUserId(ctx: Context, id: string): Promise<void> {
+        console.info('============= Eliminando Usuario =============');
+        
+        // Verificar si el usuario existe
+        const userKey = USER_PREFIX + id;
+        const userExists = await this.userExists(ctx, id);
+        if (!userExists) {
+            throw new Error(`El usuario con dirección ${id} no existe`);
+        }
+
+        // Obtener el usuario actual para registro/auditoría antes de eliminarlo
+        const userJSON = await ctx.stub.getState(userKey);
+        const user = JSON.parse(userJSON.toString());
+        
+        // Registrar la eliminación (opcional - puedes eliminar estas líneas si no necesitas auditoría)
+        console.info(`Eliminando usuario: ${JSON.stringify(user)}`);
+        
+        // Eliminar el usuario del estado mundial
+        await ctx.stub.deleteState(userKey);
+        console.info(`Usuario ${id} eliminado correctamente`);
+        
+        // Emitir un evento de eliminación (opcional - útil para notificar a aplicaciones cliente)
+        ctx.stub.setEvent('UserDeleted', Buffer.from(JSON.stringify({
+            address: user.id,
+        })));
+    }
 }

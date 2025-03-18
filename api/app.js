@@ -168,6 +168,21 @@ app.post('/init', async (req, res) => {
     }
 });
 
+app.delete('/users/:address/delete', async (req, res) => {
+    try {
+        const { address } = req.params;
+        
+        // Opcional: Añadir verificaciones adicionales de seguridad
+        // Por ejemplo, verificar que el usuario que hace la solicitud tiene permisos de administrador
+        
+        await userContract.submitTransaction('deleteUserId', address);
+        res.json({ message: 'Usuario eliminado correctamente' });
+    } catch (error) {
+        console.error('Error al eliminar usuario:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
