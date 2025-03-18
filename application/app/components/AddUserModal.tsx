@@ -21,7 +21,7 @@ function SubmitButton() {
       disabled={pending}
       className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
-      {pending ? 'Creando...' : 'Crear Usuario'}
+      {pending ? 'Adding..' : 'Add user'}
     </button>
   );
 }
@@ -229,7 +229,7 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
               onClick={onClose}
               className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Cancelar
+              Cancel
             </button>
           </div>
         </form>
