@@ -19,7 +19,7 @@ const UserConnect: React.FC = () => {
     return (
       <button
         onClick={connect}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        className="bg-[#05df72]  hover:bg-green-800 text-white font-medium py-2 px-4 rounded-lg transition-colors"
       >
         Connect
       </button>
@@ -34,7 +34,7 @@ const UserConnect: React.FC = () => {
       
       <Link 
         href="/dashboard" 
-        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        className="bg-[#05df72] hover:bg-green-400 text-white font-medium py-2 px-4 rounded-lg transition-colors"
       >
         Dashboard
       </Link>

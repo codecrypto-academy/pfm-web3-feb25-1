@@ -21,7 +21,7 @@ export default function AddUserButton() {
     <>
       <button
         onClick={() => setIsModalOpen(true)}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        className="bg-[#05df72]  hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
       >
         Add user
       </button>
