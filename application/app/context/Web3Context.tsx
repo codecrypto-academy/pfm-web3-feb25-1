@@ -59,11 +59,38 @@ export function Web3Provider({ children }: Web3ProviderProps) {
     }
   };
 
-  const disconnect = () => {
+/*   const disconnect = () => {
     setProvider(null);
     setSigner(null);
     setAccount(null);
     setIsConnected(false);
+  }; */
+
+  const disconnect = async () => {
+    try {
+      // Limpiar estados locales
+      setProvider(null);
+      setSigner(null);
+      setAccount(null);
+      setIsConnected(false);
+      
+      // Si quieres que el usuario vea la interfaz de MetaMask, puedes intentar
+      // cambiar a una cuenta vacía o solicitar un cambio de cuenta
+      if (window.ethereum) {
+        await window.ethereum.request({
+          method: "wallet_requestPermissions",
+          params: [{
+            eth_accounts: {}
+          }]
+        });
+      }
+      
+      // Opcional: Puedes también guardar el estado de desconexión en localStorage
+      localStorage.removeItem('walletConnected');
+      
+    } catch (error) {
+      console.error("Error disconnecting from MetaMask:", error);
+    }
   };
 
   // Listen for account changes
