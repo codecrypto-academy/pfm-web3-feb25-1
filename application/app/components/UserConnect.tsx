@@ -4,8 +4,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { useWeb3 } from '../context/Web3Context';
+import { User } from '../../../../dashboard-tracking-app/app/types/index';
 
-const UserConnection: React.FC = () => {
+const UserConnect: React.FC = () => {
   const { account, connect, disconnect, isConnected } = useWeb3();
 
   // Format wallet address to show only first 6 and last 4 characters
@@ -56,4 +57,4 @@ const UserConnection: React.FC = () => {
   );
 };
 
-export default UserConnection;
+export default UserConnect;
