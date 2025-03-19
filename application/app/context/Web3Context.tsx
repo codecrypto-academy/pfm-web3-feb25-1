@@ -3,6 +3,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { ethers } from 'ethers';
+import { useRouter } from 'next/navigation';
 
 // Define types for our context
 interface Web3ContextType {
@@ -24,6 +25,8 @@ const Web3Context = createContext<Web3ContextType>({
   disconnect: () => {},
 });
 
+
+
 interface Web3ProviderProps {
   children: ReactNode;
 }
@@ -33,22 +36,20 @@ export function Web3Provider({ children }: Web3ProviderProps) {
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [account, setAccount] = useState<string | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
+  const router = useRouter();
 
   const connect = async () => {
     try {
       if (typeof window !== 'undefined' && window.ethereum) {
-        // Request account access
-        const accounts = await window.ethereum.request({ 
-          method: 'eth_requestAccounts' 
-        });
-        
         // Create ethers provider and signer
         const ethersProvider = new ethers.BrowserProvider(window.ethereum);
         const ethersSigner = await ethersProvider.getSigner();
+
+        const accounts = await ethersProvider.send("eth_requestAccounts", []);
         
         setProvider(ethersProvider);
         setSigner(ethersSigner);
-        setAccount(accounts[0]);
+        setAccount(ethers.getAddress(accounts[0]));
         setIsConnected(true);
       } else {
         console.error("MetaMask not installed");
@@ -85,8 +86,7 @@ export function Web3Provider({ children }: Web3ProviderProps) {
         });
       }
       
-      // Opcional: Puedes también guardar el estado de desconexión en localStorage
-      localStorage.removeItem('walletConnected');
+      router.push('/');
       
     } catch (error) {
       console.error("Error disconnecting from MetaMask:", error);
