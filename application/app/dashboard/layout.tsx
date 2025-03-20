@@ -30,18 +30,27 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       { href: "/dashboard/admin/users/add2", label: "Add User" },
     ],
     factory: [
-      { href: "/dashboard/factory/tokenizar", label: "Tokenizar parte" },
-      { href: "/dashboard/factory/listatoken", label: "Listar partes" },
-      { href: "/dashboard/factory/transfer", label: "Enviar parte" }
+      { href: "/dashboard/factory/tokenizar", label: "Create auto part" },
+      { href: "/dashboard/factory/listatoken", label: "List auto parts" },
+      { href: "/dashboard/factory/transfer", label: "Send auto parts" }
     ],
-    asssembler: [
-      { href: "/dashboard/asssembler/listatoken", label: "Lista Token" },
-      { href: "/dashboard/asssembler/transfer", label: "Transferir Token" },
-      {
-        href: "/dashboard/asssembler/receivedTransfers",
-        label: "Transferencias Recibidas",
+    assembler: [
+      { href: "/dashboard/assembler/tokenizar", label: "Assemble car" },
+      { href: "/dashboard/asssembler/listatoken", label: "List auto parts " },
+      { href: "/dashboard/asssembler/listatoken", label: "List assembled cars " },
+      { href: "/dashboard/asssembler/transfer", label: "Transfer car" },
+      { href: "/dashboard/asssembler/receivedTransfers", label: "Parts transferred",
       },
     ],
+    logistic: [
+      { href: "/dashboard/logistic/tokenizar", label: "Receive car" },
+      { href: "/dashboard/logistic/listatoken", label: "Send car" },
+    ],
+    retailer: [
+      { href: "/dashboard/retailer/tokenizar", label: "Receive car" },
+      { href: "/dashboard/retailer/listatoken", label: "List cars" },
+      { href: "/dashboard/retailer/transfer", label: "Sell car" }
+    ]
   };
 
   useEffect(() => {
@@ -51,6 +60,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       setLoading(false);
       return;
     }
+    
     
     // Función para obtener los datos del usuario
     const fetchUserData = async () => {
@@ -78,6 +88,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!user) router.push('/');
+  console.log("THIS IS THE USER OBJECT",user);
 
   return (
     <div>
