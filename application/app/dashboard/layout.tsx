@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 import Header from "../components/Header";
 import { useWeb3 } from "../context/Web3Context";
+import { useRouter } from "next/navigation";
 
 
 interface DashboardLayoutProps {
@@ -28,36 +29,20 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       { href: "/dashboard/admin/users", label: "Users Management" },
       { href: "/dashboard/admin/users/add2", label: "Add User" },
     ],
-    producer: [
-      { href: "/dashboard/tokenizar", label: "Tokenizar" },
-      { href: "/dashboard/listatoken", label: "Lista Token" },
-      { href: "/dashboard/transfer", label: "Transferir Token" },
-      {
-        href: "/dashboard/receivedTransfers",
-        label: "Transferencias Recibidas",
-      },
-    ],
     factory: [
-      { href: "/dashboard/tokenizar", label: "Tokenizar" },
-      { href: "/dashboard/listatoken", label: "Lista Token" },
-      { href: "/dashboard/transfer", label: "Transferir Token" },
+      { href: "/dashboard/factory/tokenizar", label: "Tokenizar parte" },
+      { href: "/dashboard/factory/listar", label: "Listar partes" },
+      { href: "/dashboard/factory/transfer", label: "Enviar parte" },
       {
-        href: "/dashboard/receivedTransfers",
+        href: "/dashboard/factory/receivedTransfers",
         label: "Transferencias Recibidas",
       },
     ],
-    retailer: [
-      { href: "/dashboard/listatoken", label: "Lista Token" },
-      { href: "/dashboard/transfer", label: "Transferir Token" },
+    asssembler: [
+      { href: "/dashboard/asssembler/listatoken", label: "Lista Token" },
+      { href: "/dashboard/asssembler/transfer", label: "Transferir Token" },
       {
-        href: "/dashboard/receivedTransfers",
-        label: "Transferencias Recibidas",
-      },
-    ],
-    consumer: [
-      { href: "/dashboard/listatoken", label: "Lista Token" },
-      {
-        href: "/dashboard/receivedTransfers",
+        href: "/dashboard/asssembler/receivedTransfers",
         label: "Transferencias Recibidas",
       },
     ],
@@ -70,7 +55,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       setLoading(false);
       return;
     }
-
+    
     // Función para obtener los datos del usuario
     const fetchUserData = async () => {
       try {
@@ -93,10 +78,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
     fetchUserData();
   }, [account]);
-
+  const router = useRouter();
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (!user) return <div>No se encontró el usuario</div>;
+  if (!user) router.push('/');
 
   return (
     <div>
