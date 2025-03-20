@@ -31,12 +31,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     ],
     factory: [
       { href: "/dashboard/factory/tokenizar", label: "Tokenizar parte" },
-      { href: "/dashboard/factory/listar", label: "Listar partes" },
-      { href: "/dashboard/factory/transfer", label: "Enviar parte" },
-      {
-        href: "/dashboard/factory/receivedTransfers",
-        label: "Transferencias Recibidas",
-      },
+      { href: "/dashboard/factory/listatoken", label: "Listar partes" },
+      { href: "/dashboard/factory/transfer", label: "Enviar parte" }
     ],
     asssembler: [
       { href: "/dashboard/asssembler/listatoken", label: "Lista Token" },
