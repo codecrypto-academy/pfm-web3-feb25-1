@@ -4,8 +4,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { useWeb3 } from '../context/Web3Context';
+import { User } from '../../../../dashboard-tracking-app/app/types/index';
 
-const UserConnection: React.FC = () => {
+const UserConnect: React.FC = () => {
   const { account, connect, disconnect, isConnected } = useWeb3();
 
   // Format wallet address to show only first 6 and last 4 characters
@@ -18,7 +19,7 @@ const UserConnection: React.FC = () => {
     return (
       <button
         onClick={connect}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        className="bg-[#05df72]  hover:bg-green-800 text-white font-medium py-2 px-4 rounded-lg transition-colors"
       >
         Connect
       </button>
@@ -33,7 +34,7 @@ const UserConnection: React.FC = () => {
       
       <Link 
         href="/dashboard" 
-        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        className="bg-[#05df72] hover:bg-green-400 text-white font-medium py-2 px-4 rounded-lg transition-colors"
       >
         Dashboard
       </Link>
@@ -56,4 +57,4 @@ const UserConnection: React.FC = () => {
   );
 };
 
-export default UserConnection;
+export default UserConnect;

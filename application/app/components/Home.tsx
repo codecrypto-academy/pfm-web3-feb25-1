@@ -22,7 +22,7 @@ export default function Home({ initialUsers }) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
-        <title>Home | My Application</title>
+        <title>Home | Eco Track Chain</title>
         <meta name="description" content="Listado de usuarios de mi aplicación" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

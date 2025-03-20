@@ -19,7 +19,7 @@ function SubmitButton() {
     <button 
       type="submit" 
       disabled={pending}
-      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      className="bg-[#05df72]  hover:bg-green-800  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
       {pending ? 'Adding..' : 'Add user'}
     </button>
@@ -227,7 +227,7 @@ export default function AddUserModal({ isOpen, onClose,onSuccess}: AddUserModalP
             <button
               type="button"
               onClick={onClose}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-green-800 hover:bg-green-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cancel
             </button>
